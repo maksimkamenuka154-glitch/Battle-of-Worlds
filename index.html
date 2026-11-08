@@ -114,5 +114,6 @@ function playPlaylistSong(track){stopMusic();stopPlaylistSong();playlistTrack=tr
 function updateSongProgress(){const left=Math.max(0,playlistDuration-playlistElapsed);const fmt=n=>Math.floor(n/60)+':'+String(n%60).padStart(2,'0');$('songBar').style.width=(playlistElapsed/playlistDuration*100)+'%';$('songElapsed').textContent=fmt(playlistElapsed)+' прошло';$('songRemaining').textContent=fmt(left)+' осталось · всего '+fmt(playlistDuration)}
 function stopPlaylistSong(){if(playlistTimer){clearInterval(playlistTimer);playlistTimer=null}playlistPlaying=false;stopMusic();if($('songNow'))$('songNow').classList.add('hidden')}
 function reset(){localStorage.removeItem('bow-progress');$('continueGame').classList.add('hidden');modal('♻️','Прогресс сброшен','Теперь можно начать заново.',[['ОК',menu,'primary']])}
+if(localStorage.getItem('bow-progress'))$('continueGame').classList.remove('hidden');
 document.addEventListener('keydown',e=>{if(!/^[1-7]$/.test(e.key)||$('game').classList.contains('hidden'))return;if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;const b=$('roster').children[Number(e.key)-1];if(b&&!b.disabled){e.preventDefault();b.click()}});
 </script></body></html>
